@@ -1,4 +1,4 @@
-From 8687066158ac7a2cd3b20d0b112e66c1d1402d0e Mon Sep 17 00:00:00 2001
+From bf4956e65e359dcab9724efc22e950f411e7d05e Mon Sep 17 00:00:00 2001
 From: Carl George <carl@george.computer>
 Date: Wed, 21 Oct 2020 00:44:51 -0500
 Subject: [PATCH] Remove schemas from compile target
@@ -8,12 +8,12 @@ Subject: [PATCH] Remove schemas from compile target
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index e8dfc33..c4c3579 100644
+index cd37b83..c5dea22 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -29,10 +29,10 @@ transpile: $(sources) clean
- configure:
- 	sh scripts/configure.sh
+@@ -37,10 +37,10 @@ configure:
+ convert: transpile
+ 	sh scripts/transpile.sh
  
 -compile: convert metadata.json schemas
 +compile: convert metadata.json
