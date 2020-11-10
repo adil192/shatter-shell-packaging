@@ -24,7 +24,11 @@ Patch0:         0001-Remove-schemas-from-compile-target.patch
 
 BuildArch:      noarch
 BuildRequires:  npm(typescript) >= 3.8
+
 Requires:       gnome-shell-extension-common
+
+Provides:       %{extension}
+
 Recommends:     %{name}-shortcut-overrides
 Recommends:     gnome-extensions-app
 Recommends:     gnome-shell-extension-native-window-placement
@@ -81,6 +85,7 @@ install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_
 %changelog
 * Mon Nov 09 2020 Carl George <carl@george.computer> - 1.0.0-1.20201109git04eaf4f
 - Latest upstream
+- Provide pop-shell
 
 * Thu Oct 29 2020 Carl George <carl@george.computer> - 1.0.0-1
 - Latest upstream
