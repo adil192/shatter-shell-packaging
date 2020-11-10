@@ -1,7 +1,8 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
 %global forgeurl    https://github.com/pop-os/shell
-%global tag         %{version}
+%global commit      04eaf4f03bbe68c992bd6c5bcd72d0f4dbdaaa84
+%global date        20201109
 
 %forgemeta
 
@@ -78,6 +79,9 @@ install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_
 
 
 %changelog
+* Mon Nov 09 2020 Carl George <carl@george.computer> - 1.0.0-1.20201109git04eaf4f
+- Latest upstream
+
 * Thu Oct 29 2020 Carl George <carl@george.computer> - 1.0.0-1
 - Latest upstream
 
