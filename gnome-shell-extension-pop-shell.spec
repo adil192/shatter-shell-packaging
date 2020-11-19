@@ -1,14 +1,14 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
 %global forgeurl    https://github.com/pop-os/shell
-%global commit      04eaf4f03bbe68c992bd6c5bcd72d0f4dbdaaa84
-%global date        20201109
+%global commit      5137d5262b2cbd6ee7f45e4ee2662cec34822775
+%global date        20201118
 
 %forgemeta
 
 Name:           gnome-shell-extension-%{extension}
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 # The entire source code is GPLv3 except math.js which is ASL 2.0
 License:        GPLv3 and ASL 2.0
@@ -83,6 +83,9 @@ install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_
 
 
 %changelog
+* Wed Nov 18 2020 Carl George <carl@george.computer> - 1.0.0-2.20201118git5137d52
+- Latest upstream
+
 * Mon Nov 09 2020 Carl George <carl@george.computer> - 1.0.0-1.20201109git04eaf4f
 - Latest upstream
 - Provide pop-shell
