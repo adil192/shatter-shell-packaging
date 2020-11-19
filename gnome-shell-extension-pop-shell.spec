@@ -66,6 +66,10 @@ install -D -p -m 0644 \
     schemas/org.gnome.shell.extensions.%{extension}.gschema.xml \
     %{buildroot}%{_datadir}/glib-2.0/schemas/%{uuid}.gschema.xml
 
+# install the gnome-control-center keybindings
+install -d -m 0755 %{buildroot}%{_datadir}/gnome-control-center/keybindings
+install -p -m 0644 keybindings/*.xml %{buildroot}%{_datadir}/gnome-control-center/keybindings/
+
 # install the schema override files
 install -d -m 0755 %{buildroot}%{_datadir}/glib-2.0/schemas
 install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_datadir}/glib-2.0/schemas/
@@ -76,6 +80,7 @@ install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_
 %doc README.md
 %{_datadir}/gnome-shell/extensions/%{uuid}
 %{_datadir}/glib-2.0/schemas/%{uuid}.gschema.xml
+%{_datadir}/gnome-control-center/keybindings/*.xml
 
 
 %files shortcut-overrides
@@ -85,6 +90,7 @@ install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_
 %changelog
 * Wed Nov 18 2020 Carl George <carl@george.computer> - 1.0.0-2.20201118git5137d52
 - Latest upstream
+- Include gnome-control-center keybindings
 
 * Mon Nov 09 2020 Carl George <carl@george.computer> - 1.0.0-1.20201109git04eaf4f
 - Latest upstream
