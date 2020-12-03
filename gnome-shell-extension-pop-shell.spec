@@ -72,7 +72,7 @@ install -p -m 0644 keybindings/*.xml %{buildroot}%{_datadir}/gnome-control-cente
 
 # install the schema override files
 install -d -m 0755 %{buildroot}%{_datadir}/glib-2.0/schemas
-install -p -m 0644 %{_sourcedir}/*.%{extension}.gschema.override %{buildroot}%{_datadir}/glib-2.0/schemas/
+install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/glib-2.0/schemas/
 
 
 %files
