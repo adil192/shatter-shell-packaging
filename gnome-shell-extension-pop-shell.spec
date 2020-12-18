@@ -24,6 +24,7 @@ Patch0:         0001-Remove-schemas-from-compile-target.patch
 
 BuildArch:      noarch
 BuildRequires:  npm(typescript) >= 3.8
+BuildRequires: make
 
 Requires:       gnome-shell-extension-common
 
