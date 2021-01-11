@@ -1,14 +1,13 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
 %global forgeurl    https://github.com/pop-os/shell
-%global commit      ee943b87bd00b2bb7b3ecf970f4f88741346982e
-%global date        20201130
+%global tag         %{version}
 
 %forgemeta
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.0.0
-Release:        3%{?dist}
+Version:        1.1.0
+Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 # The entire source code is GPLv3 except math.js which is ASL 2.0
 License:        GPLv3 and ASL 2.0
@@ -24,11 +23,12 @@ Patch0:         0001-Remove-schemas-from-compile-target.patch
 
 BuildArch:      noarch
 BuildRequires:  npm(typescript) >= 3.8
-BuildRequires: make
+BuildRequires:  make
 
 Requires:       gnome-shell-extension-common
 
 Provides:       %{extension}
+Provides:       bundled(npm(mathjs)) = 8.1.0
 
 Recommends:     %{name}-shortcut-overrides
 Recommends:     gnome-extensions-app
@@ -53,6 +53,9 @@ Shortcut overrides for %{name}.
 
 %prep
 %forgeautosetup -p 1
+
+# remove launcher plugin developer guide
+rm src/plugins/README.md
 
 
 %build
@@ -82,6 +85,7 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 %{_datadir}/gnome-shell/extensions/%{uuid}
 %{_datadir}/glib-2.0/schemas/%{uuid}.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
+%{_prefix}/lib/pop-shell
 
 
 %files shortcut-overrides
@@ -89,6 +93,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sun Jan 10 2021 Carl George <carl@george.computer> - 1.1.0-1
+- Latest upstream
+
 * Thu Dec 03 2020 Carl George <carl@george.computer> - 1.0.0-3.20201130gitee943b8
 - Latest upstream
 
