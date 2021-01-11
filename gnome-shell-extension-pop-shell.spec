@@ -30,7 +30,7 @@ Requires:       gnome-shell-extension-common
 Provides:       %{extension}
 Provides:       bundled(npm(mathjs)) = 8.1.0
 
-Recommends:     %{name}-shortcut-overrides
+Recommends:     %{name}-shortcut-overrides = %{version}-%{release}
 Recommends:     gnome-extensions-app
 Recommends:     gnome-shell-extension-native-window-placement
 
