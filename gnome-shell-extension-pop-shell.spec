@@ -6,11 +6,13 @@
 %forgemeta
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.1.0
+Version:        1.2.0
 Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
-# The entire source code is GPLv3 except math.js which is ASL 2.0
-License:        GPLv3 and ASL 2.0
+# main license - GPLv3
+# src/plugins/calc/math.js - ASL 2.0
+# src/levenshtein.ts - MIT
+License:        GPLv3 and ASL 2.0 and MIT
 URL:            %{forgeurl}
 Source0:        %{forgesource}
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
@@ -29,6 +31,7 @@ Requires:       gnome-shell-extension-common
 
 Provides:       %{extension}
 Provides:       bundled(npm(mathjs)) = 8.1.0
+Provides:       bundled(npm(js-levenshtein))
 
 Recommends:     %{name}-shortcut-overrides = %{version}-%{release}
 Recommends:     gnome-extensions-app
@@ -93,6 +96,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Wed Jan 20 2021 Carl George <carl@george.computer> - 1.2.0-1
+- Latest upstream
+
 * Sun Jan 10 2021 Carl George <carl@george.computer> - 1.1.0-1
 - Latest upstream
 
