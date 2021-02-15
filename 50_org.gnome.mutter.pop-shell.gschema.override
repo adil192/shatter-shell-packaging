@@ -1,4 +1,4 @@
-[org.gnome.mutter]
+[org.gnome.mutter:GNOME]
 attach-modal-dialogs = false
 workspaces-only-on-primary = false
 
