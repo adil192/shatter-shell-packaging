@@ -1,13 +1,15 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
 %global forgeurl    https://github.com/pop-os/shell
-%global tag         %{version}
+%global commit      d59e373a7aaf3cc570f5b91a3efc9e6581da90c3
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global distprefix  %{nil}
 
 %forgemeta
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0
-Release:        3%{?dist}
+Version:        1.2.0^1.%{shortcommit}
+Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 # main license - GPLv3
 # src/plugins/calc/math.js - ASL 2.0
@@ -21,7 +23,7 @@ Source3:        50_org.gnome.mutter.wayland.%{extension}.gschema.override
 Source4:        50_org.gnome.settings-daemon.plugins.media-keys.%{extension}.gschema.override
 Source5:        50_org.gnome.shell.%{extension}.gschema.override
 # downstream-only patch
-Patch0:         0001-Remove-schemas-from-compile-target.patch
+Patch0:         0001-Remove-schema-handling-from-transpile.sh.patch
 
 BuildArch:      noarch
 BuildRequires:  npm(typescript) >= 3.8
@@ -96,6 +98,10 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sat Jun 26 2021 Carl George <carl@george.computer> - 1.2.0^1.d59e373-1
+- Latest upstream snapshot
+- Fixes: rhbz#1946867
+
 * Mon Feb 15 2021 Carl George <carl@george.computer> - 1.2.0-3
 - Fix org.gnome.mutter override
 
