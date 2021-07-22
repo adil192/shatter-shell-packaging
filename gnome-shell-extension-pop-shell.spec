@@ -9,7 +9,7 @@
 
 Name:           gnome-shell-extension-%{extension}
 Version:        1.2.0^1.%{shortcommit}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 # main license - GPLv3
 # src/plugins/calc/math.js - ASL 2.0
@@ -98,6 +98,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0^1.d59e373-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Sat Jun 26 2021 Carl George <carl@george.computer> - 1.2.0^1.d59e373-1
 - Latest upstream snapshot
 - Fixes: rhbz#1946867
