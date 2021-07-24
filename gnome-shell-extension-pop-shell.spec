@@ -1,22 +1,20 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global forgeurl    https://github.com/pop-os/shell
-%global commit      d59e373a7aaf3cc570f5b91a3efc9e6581da90c3
+%global commit      9616931a2f8da33ff60d6332cbb1e4036c9ae2b3
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global distprefix  %{nil}
-
-%forgemeta
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^1.%{shortcommit}
-Release:        2%{?dist}
+Version:        1.2.0^2.%{shortcommit}
+Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 # main license - GPLv3
 # src/plugins/calc/math.js - ASL 2.0
 # src/levenshtein.ts - MIT
 License:        GPLv3 and ASL 2.0 and MIT
-URL:            %{forgeurl}
-Source0:        %{forgesource}
+URL:            https://github.com/pop-os/shell
+BuildArch:      noarch
+
+Source0:        %{url}/archive/%{commit}/%{extension}-%{shortcommit}.tar.gz
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
 Source2:        50_org.gnome.mutter.%{extension}.gschema.override
 Source3:        50_org.gnome.mutter.wayland.%{extension}.gschema.override
@@ -25,19 +23,17 @@ Source5:        50_org.gnome.shell.%{extension}.gschema.override
 # downstream-only patch
 Patch0:         0001-Remove-schema-handling-from-transpile.sh.patch
 
-BuildArch:      noarch
 BuildRequires:  npm(typescript) >= 3.8
 BuildRequires:  make
 
 Requires:       gnome-shell-extension-common
 
+Recommends:     gnome-extensions-app
+Recommends:     %{name}-shortcut-overrides = %{version}-%{release}
+
 Provides:       %{extension}
 Provides:       bundled(npm(mathjs)) = 8.1.0
 Provides:       bundled(npm(js-levenshtein))
-
-Recommends:     %{name}-shortcut-overrides = %{version}-%{release}
-Recommends:     gnome-extensions-app
-Recommends:     gnome-shell-extension-native-window-placement
 
 
 %description
@@ -57,7 +53,7 @@ Shortcut overrides for %{name}.
 
 
 %prep
-%forgeautosetup -p 1
+%autosetup -p 1 -n shell-%{commit}
 
 # remove launcher plugin developer guide
 rm src/plugins/README.md
@@ -73,7 +69,7 @@ rm src/plugins/README.md
 # install the schema file
 install -D -p -m 0644 \
     schemas/org.gnome.shell.extensions.%{extension}.gschema.xml \
-    %{buildroot}%{_datadir}/glib-2.0/schemas/%{uuid}.gschema.xml
+    %{buildroot}%{_datadir}/glib-2.0/schemas/org.gnome.shell.extensions.%{extension}.gschema.xml
 
 # install the gnome-control-center keybindings
 install -d -m 0755 %{buildroot}%{_datadir}/gnome-control-center/keybindings
@@ -88,7 +84,7 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 %license LICENSE
 %doc README.md
 %{_datadir}/gnome-shell/extensions/%{uuid}
-%{_datadir}/glib-2.0/schemas/%{uuid}.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.shell.extensions.%{extension}.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
 %{_prefix}/lib/pop-shell
 
@@ -98,6 +94,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sat Jul 24 2021 Carl George <carl@george.computer> - 1.2.0^2.9616931-1
+- Latest upstream snapshot
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0^1.d59e373-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
