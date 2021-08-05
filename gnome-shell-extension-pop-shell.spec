@@ -1,11 +1,11 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      9616931a2f8da33ff60d6332cbb1e4036c9ae2b3
+%global commit      ab87042d2579c9ad9bb3271584b0281d97da7baa
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^2.%{shortcommit}
-Release:        1%{?dist}
+Version:        1.2.0^3.%{shortcommit}
+Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 # main license - GPLv3
 # src/plugins/calc/math.js - ASL 2.0
@@ -94,73 +94,4 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
-* Sat Jul 24 2021 Carl George <carl@george.computer> - 1.2.0^2.9616931-1
-- Latest upstream snapshot
-
-* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0^1.d59e373-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
-
-* Sat Jun 26 2021 Carl George <carl@george.computer> - 1.2.0^1.d59e373-1
-- Latest upstream snapshot
-- Fixes: rhbz#1946867
-
-* Mon Feb 15 2021 Carl George <carl@george.computer> - 1.2.0-3
-- Fix org.gnome.mutter override
-
-* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
-
-* Wed Jan 20 2021 Carl George <carl@george.computer> - 1.2.0-1
-- Latest upstream
-
-* Sun Jan 10 2021 Carl George <carl@george.computer> - 1.1.0-1
-- Latest upstream
-
-* Thu Dec 03 2020 Carl George <carl@george.computer> - 1.0.0-3.20201130gitee943b8
-- Latest upstream
-
-* Wed Nov 18 2020 Carl George <carl@george.computer> - 1.0.0-2.20201118git5137d52
-- Latest upstream
-- Include gnome-control-center keybindings
-
-* Mon Nov 09 2020 Carl George <carl@george.computer> - 1.0.0-1.20201109git04eaf4f
-- Latest upstream
-- Provide pop-shell
-
-* Thu Oct 29 2020 Carl George <carl@george.computer> - 1.0.0-1
-- Latest upstream
-
-* Thu Oct 22 2020 Carl George <carl@george.computer> - 0.1.0-1.20201016gita11d3c3
-- Split gschema overrides to seperate files
-
-* Tue Oct 20 2020 Carl George <carl@george.computer> - 0.1.0-0.9.20201016gita11d3c3
-- Latest upstream commit
-- Sync shortcut overrides with pop-session
-- Move shortcut overrides to a subpackage
-- Open shortcuts website if pop-shell-shortcuts is not installed
-
-* Fri Oct 02 2020 Carl George <carl@george.computer> - 0.1.0-0.8.20201001gitff702bc
-- Latest upstream commit
-- Include new color-dialog file
-
-* Fri Oct 02 2020 Drew DeVore <drew@devorcula.com> - 0.1.0-0.7.20200929gitb9f8d96
-- Added override for stacking conflict
-
-* Thu Oct 01 2020 Carl George <carl@george.computer> - 0.1.0-0.6.20200929gitb9f8d96
-- Latest upstream commit
-
-* Mon Sep 21 2020 Carl George <carl@george.computer> - 0.1.0-0.5.20200920git8791171
-- Latest upstream commit
-
-* Tue Sep 15 2020 Carl George <carl@george.computer> - 0.1.0-0.4.20200915gite5a80ea
-- Latest upstream commit
-
-* Thu Sep 10 2020 Carl George <carl@george.computer> - 0.1.0-0.3.20200908git017c92e
-- Latest upstream commit
-- Add primary-super-h/l versions of toggle-tiled-left/right keybindings
-
-* Fri Aug 28 2020 Carl George <carl@george.computer> - 0.1.0-0.2.20200821git8416328
-- Add keyboard shortcut overrides
-
-* Thu Aug 27 2020 Carl George <carl@george.computer> - 0.1.0-0.1.20200821git8416328
-- Initial package
+%autochangelog
