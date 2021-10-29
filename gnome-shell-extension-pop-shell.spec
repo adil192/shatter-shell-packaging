@@ -1,16 +1,13 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      ab87042d2579c9ad9bb3271584b0281d97da7baa
+%global commit      1fddaa8953a6554a83038bb5662662eb761eb361
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^3.%{shortcommit}
-Release:        2%{?dist}
+Version:        1.2.0^4.%{shortcommit}
+Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
-# main license - GPLv3
-# src/plugins/calc/math.js - ASL 2.0
-# src/levenshtein.ts - MIT
-License:        GPLv3 and ASL 2.0 and MIT
+License:        GPLv3
 URL:            https://github.com/pop-os/shell
 BuildArch:      noarch
 
@@ -55,9 +52,6 @@ Shortcut overrides for %{name}.
 %prep
 %autosetup -p 1 -n shell-%{commit}
 
-# remove launcher plugin developer guide
-rm src/plugins/README.md
-
 
 %build
 %make_build compile
@@ -86,7 +80,6 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 %{_datadir}/gnome-shell/extensions/%{uuid}
 %{_datadir}/glib-2.0/schemas/org.gnome.shell.extensions.%{extension}.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/*.xml
-%{_prefix}/lib/pop-shell
 
 
 %files shortcut-overrides
@@ -94,6 +87,11 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Thu Oct 28 2021 Carl George <carl@george.computer> - 1.2.0^4.1fddaa8-1
+- Latest upstream snapshot
+- Upstream support for GNOME 41
+- Upstream removal of pop-launcher
+
 * Thu Aug 05 2021 Carl George <carl@george.computer> - 1.2.0^3.ab87042-2
 - Rebuild to revert %%autochangelog
 

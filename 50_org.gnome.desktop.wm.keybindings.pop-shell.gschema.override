@@ -1,5 +1,5 @@
 [org.gnome.desktop.wm.keybindings]
-close = ['<Super>q']
+close = ['<Alt>F4', '<Super>q']
 maximize = []
 minimize = []
 move-to-monitor-down = []
