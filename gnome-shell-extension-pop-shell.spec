@@ -87,6 +87,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sun Jan 23 2022 Carl George <carl@george.computer> - 1.2.0^5.21745c4-1
+- Latest upstream snapshot
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0^4.1fddaa8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
