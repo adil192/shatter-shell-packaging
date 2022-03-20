@@ -1,10 +1,10 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      21745c4a8076ad52c9ccc77ca5726f5c7b83de6c
+%global commit      af192b49bac58d0204167ab690fa80d7ac524071
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^5.%{shortcommit}
+Version:        1.2.0^6.%{shortcommit}
 Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPLv3
@@ -87,6 +87,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sun Mar 20 2022 Carl George <carl@george.computer> - 1.2.0^6.af192b4-1
+- Latest upstream snapshot (GNOME 42 compatibility)
+
 * Sun Jan 23 2022 Carl George <carl@george.computer> - 1.2.0^5.21745c4-1
 - Latest upstream snapshot
 
