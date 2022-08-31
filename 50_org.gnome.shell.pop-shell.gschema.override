@@ -1,7 +1,7 @@
 [org.gnome.shell.keybindings]
 open-application-menu = []
-toggle-message-tray = ['<Super>v']
-toggle-overview = []
+shift-overview-down = []
+shift-overview-up = []
 switch-to-application-1 = []
 switch-to-application-2 = []
 switch-to-application-3 = []
@@ -11,6 +11,7 @@ switch-to-application-6 = []
 switch-to-application-7 = []
 switch-to-application-8 = []
 switch-to-application-9 = []
+toggle-message-tray = ['<Super>v']
 
 [org.gnome.shell.overrides]
 attach-modal-dialogs = false

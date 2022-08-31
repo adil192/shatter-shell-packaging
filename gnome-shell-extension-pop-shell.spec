@@ -1,11 +1,11 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      af192b49bac58d0204167ab690fa80d7ac524071
+%global commit      4c03091552c48be89bfa20db7e0dba1f0cc3eedb
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^6.%{shortcommit}
-Release:        2%{?dist}
+Version:        1.2.0^7.%{shortcommit}
+Release:        1%{?dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPLv3
 URL:            https://github.com/pop-os/shell
@@ -87,6 +87,9 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Wed Aug 31 2022 Carl George <carl@george.computer> - 1.2.0^7.4c03091-1
+- Latest upstream snapshot
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.0^6.af192b4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
