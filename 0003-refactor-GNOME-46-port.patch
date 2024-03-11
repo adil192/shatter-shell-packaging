@@ -1,0 +1,116 @@
+From 96197d462eb62c3ec6b47586299ca194a9e885e6 Mon Sep 17 00:00:00 2001
+From: Carl George <carlwgeorge@gmail.com>
+Date: Mon, 11 Mar 2024 15:05:05 -0500
+Subject: [PATCH 3/3] refactor: GNOME 46 port
+
+It looks like .add() and .add_actor() were removed in GNOME 46.
+Replacing these with .add_child() seems to work.  With these changes I'm
+able to successfully install and use the extension on GNOME 46 RC.
+
+https://github.com/oae/gnome-shell-pano/issues/259
+https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/350cd296fa90adb3d18f9b375b5531077cff825a
+---
+ metadata.json         | 3 ++-
+ src/context.ts        | 2 +-
+ src/panel_settings.ts | 6 +++---
+ src/search.ts         | 8 ++++----
+ src/stack.ts          | 6 +++---
+ 5 files changed, 13 insertions(+), 12 deletions(-)
+
+diff --git a/metadata.json b/metadata.json
+index 4f22b7e..c59146e 100644
+--- a/metadata.json
++++ b/metadata.json
+@@ -5,6 +5,7 @@
+     "uuid": "pop-shell@system76.com",
+     "settings-schema": "org.gnome.shell.extensions.pop-shell",
+     "shell-version": [
+-        "45"
++        "45",
++        "46"
+     ]
+ }
+diff --git a/src/context.ts b/src/context.ts
+index 434040b..2b73260 100644
+--- a/src/context.ts
++++ b/src/context.ts
+@@ -5,7 +5,7 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+ 
+ export function addMenu(widget: any, request: (menu: St.Widget) => void): St.Widget {
+     const menu = new PopupMenu.PopupMenu(widget, 0.0, St.Side.TOP, 0);
+-    Main.uiGroup.add_actor(menu.actor);
++    Main.uiGroup.add_child(menu.actor);
+     menu.actor.hide();
+     menu.actor.add_style_class_name('panel-menu');
+ 
+diff --git a/src/panel_settings.ts b/src/panel_settings.ts
+index fbcafbf..f0b69df 100644
+--- a/src/panel_settings.ts
++++ b/src/panel_settings.ts
+@@ -52,7 +52,7 @@ export class Indicator {
+             this.button.icon = button_icon_auto_off;
+         }
+ 
+-        this.button.add_actor(this.button.icon);
++        this.button.add_child(this.button.icon);
+ 
+         let bm = this.button.menu;
+ 
+@@ -135,8 +135,8 @@ function floating_window_exceptions(ext: Ext, menu: any): any {
+     let icon = new St.Icon({ icon_name: 'go-next-symbolic', icon_size: 16 });
+ 
+     let widget = new St.BoxLayout({ vertical: false });
+-    widget.add(label);
+-    widget.add(icon);
++    widget.add_child(label);
++    widget.add_child(icon);
+     widget.set_x_expand(true);
+ 
+     let base = new PopupBaseMenuItem();
+diff --git a/src/search.ts b/src/search.ts
+index 97fa039..23f9d32 100644
+--- a/src/search.ts
++++ b/src/search.ts
+@@ -211,10 +211,10 @@ export class Search {
+         });
+ 
+         const scroller = new St.ScrollView();
+-        scroller.add_actor(this.list);
++        scroller.add_child(this.list);
+ 
+-        this.dialog.contentLayout.add(this.entry);
+-        this.dialog.contentLayout.add(scroller);
++        this.dialog.contentLayout.add_child(this.entry);
++        this.dialog.contentLayout.add_child(scroller);
+ 
+         this.scroller = scroller;
+ 
+@@ -453,7 +453,7 @@ export class SearchOption {
+         layout.add_child(this.shortcut);
+ 
+         this.widget = new St.Button({ style_class: 'pop-shell-search-element' });
+-        (this.widget as any).add_actor(layout);
++        (this.widget as any).add_child(layout);
+     }
+ }
+ 
+diff --git a/src/stack.ts b/src/stack.ts
+index d0729c6..cb5cf9f 100644
+--- a/src/stack.ts
++++ b/src/stack.ts
+@@ -98,9 +98,9 @@ const TabButton = GObject.registerClass(
+             close_button.set_x_align(Clutter.ActorAlign.END);
+             close_button.set_y_align(Clutter.ActorAlign.CENTER);
+ 
+-            container.add_actor(icon);
+-            container.add_actor(label);
+-            container.add_actor(close_button);
++            container.add_child(icon);
++            container.add_child(label);
++            container.add_child(close_button);
+ 
+             super._init({
+                 child: container,
+-- 
+2.44.0
+
