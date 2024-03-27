@@ -1,10 +1,10 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      aafc9458a47a68c396933c637de00421f5198a2a
+%global commit      5fa3a500152b5131afbcbb4cfcd4a0db2fd0f063
 %global shortcommit %{lua:print(macros.commit:sub(1,7))}
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^21.%{shortcommit}
+Version:        1.2.0^22.%{shortcommit}
 Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
@@ -19,10 +19,6 @@ Source4:        50_org.gnome.settings-daemon.plugins.media-keys.%{extension}.gsc
 Source5:        50_org.gnome.shell.%{extension}.gschema.override
 # downstream-only
 Patch:          0001-Remove-schema-handling-from-transpile.sh.patch
-# https://github.com/pop-os/shell/pull/1676
-Patch:          0002-fix-check-if-extension-local-schemas-dir-exists-before-use.patch
-# https://github.com/pop-os/shell/pull/1704
-Patch:          0003-refactor-GNOME-46-port.patch
 
 BuildRequires:  typescript >= 3.8
 BuildRequires:  make
