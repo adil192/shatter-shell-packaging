@@ -1,6 +1,6 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      7898b65c20735057faf0797f8ed056704ca55f0d
+%global commit      37f5c7a3469746cbdff6045dad247c81a90b0eca
 %global shortcommit %{sub %{commit} 1 7}
 
 Name:           gnome-shell-extension-%{extension}
@@ -8,10 +8,13 @@ Version:        1.2.0^29.%{shortcommit}
 Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
-URL:            https://github.com/pop-os/shell
+URL:            https://github.com/adil192/pop-shell
 BuildArch:      noarch
 
+%undefine       _disable_source_fetch
 Source0:        %{url}/archive/%{commit}/%{extension}-%{shortcommit}.tar.gz
+%define         SHA256SUM0 b795b17d705c29d455675b81e7d4176883f9e990a8b1540f55cdb25418debc5a
+
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
 Source2:        50_org.gnome.mutter.%{extension}.gschema.override
 Source3:        50_org.gnome.mutter.wayland.%{extension}.gschema.override
@@ -20,7 +23,7 @@ Source5:        50_org.gnome.shell.%{extension}.gschema.override
 # downstream-only
 Patch:          0001-Remove-schema-handling-from-transpile.sh.patch
 
-BuildRequires:  typescript >= 3.8
+BuildRequires:  nodejs22-npm
 BuildRequires:  make
 
 Requires:       gnome-shell >= 45
@@ -46,7 +49,7 @@ Shortcut overrides for %{name}.
 
 
 %prep
-%autosetup -p 1 -n shell-%{commit}
+%autosetup -p 1 -n pop-shell-%{commit}
 
 
 %build
