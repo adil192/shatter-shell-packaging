@@ -4,8 +4,9 @@
 %global shortcommit %{sub %{commit} 1 7}
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^29.%{shortcommit}
+Version:        1.2.0^30.%{shortcommit}
 Release:        %autorelease
+Epoch:          1
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
 URL:            https://github.com/adil192/pop-shell
