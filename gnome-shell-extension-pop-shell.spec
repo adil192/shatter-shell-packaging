@@ -1,10 +1,10 @@
 %global extension   pop-shell
 %global uuid        %{extension}@system76.com
-%global commit      37f5c7a3469746cbdff6045dad247c81a90b0eca
+%global commit      453f755a55991dc1dde4b7a09e0331f12f816b35
 %global shortcommit %{sub %{commit} 1 7}
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^30.%{shortcommit}
+Version:        1.2.0^31.%{shortcommit}
 Release:        %autorelease
 Epoch:          1
 Summary:        GNOME Shell extension for advanced tiling window management
@@ -14,7 +14,6 @@ BuildArch:      noarch
 
 %undefine       _disable_source_fetch
 Source0:        %{url}/archive/%{commit}/%{extension}-%{shortcommit}.tar.gz
-%define         SHA256SUM0 b795b17d705c29d455675b81e7d4176883f9e990a8b1540f55cdb25418debc5a
 
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
 Source2:        50_org.gnome.mutter.%{extension}.gschema.override
