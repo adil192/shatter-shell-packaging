@@ -24,6 +24,9 @@ for (const info of Object.values(packageLock.packages)) {
   if (info.integrity && info.integrity.startsWith("sha512-")) {
     let sha512sum = info.integrity.substring("sha512-".length);
     npmSources += `%define         SHA512SUM${i} ${sha512sum}\n`;
+  } else if (info.integrity) {
+    console.error(`Unknown integrity format for ${info.resolved}: ${info.integrity}`);
+    process.exit(1);
   }
   ++i;
 }
