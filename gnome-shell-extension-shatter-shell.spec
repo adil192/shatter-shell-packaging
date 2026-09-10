@@ -1,19 +1,16 @@
-%global extension   pop-shell
-%global uuid        %{extension}@system76.com
-%global commit      25ed3117b27f20a487f66be52deeb5e0bcc8301c
-%global shortcommit %{sub %{commit} 1 7}
+%global extension   shatter-shell
+%global uuid        %{extension}@adilhanney.com
 
 Name:           gnome-shell-extension-%{extension}
-Version:        1.2.0^38.%{shortcommit}
+Version:        2.0.0
 Release:        %autorelease
-Epoch:          1
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
-URL:            https://github.com/adil192/pop-shell
+URL:            https://github.com/adil192/shatter-shell
 BuildArch:      noarch
 
 %undefine       _disable_source_fetch
-Source0:        %{url}/archive/%{commit}/%{extension}-%{shortcommit}.tar.gz
+Source0:        %{url}/archive/refs/tags/%{version}/%{extension}-%{version}.tar.gz
 
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
 Source2:        50_org.gnome.mutter.%{extension}.gschema.override
@@ -346,18 +343,24 @@ Requires:       gnome-shell >= 48
 Recommends:     gnome-extensions-app
 Recommends:     %{name}-shortcut-overrides = %{version}-%{release}
 Provides:       %{extension} = %{version}-%{release}
+Obsoletes:      gnome-shell-extension-pop-shell < 1.2.1
+Obsoletes:      gnome-shell-extension-pop-shell < 1:1.2.1
 
 
 %description
-Pop Shell is a keyboard-driven layer for GNOME Shell which allows for quick and
-sensible navigation and management of windows.  The core feature of Pop Shell
+Shatter Shell is a keyboard-driven layer for GNOME Shell which allows for quick and
+sensible navigation and management of windows.  The core feature of Shatter Shell
 is the addition of advanced tiling window management - a feature that has been
 highly sought within our community.  For many - ourselves included - i3wm has
 become the leading competitor to the GNOME desktop.
 
+Shatter Shell is a fork of Pop Shell.
+
 
 %package shortcut-overrides
 Summary:        Shortcut overrides for %{name}
+Obsoletes:      gnome-shell-extension-pop-shell-shortcut-overrides < 1.2.1
+Obsoletes:      gnome-shell-extension-pop-shell-shortcut-overrides < 1:1.2.1
 
 
 %description shortcut-overrides
@@ -365,7 +368,7 @@ Shortcut overrides for %{name}.
 
 
 %prep
-%autosetup -p 1 -n pop-shell-%{commit}
+%autosetup -p 1 -n %{extension}-%{version}
 for f in %{_sourcedir}/*.tgz; do
   npm cache add "$f"
 done

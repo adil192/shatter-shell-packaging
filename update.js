@@ -9,7 +9,7 @@ const { execSync } = require('child_process');
 /** @type {string | undefined} */
 const proj = process.argv[2];
 if (!proj) {
-  console.error("Usage: ./update.js path/to/pop-shell");
+  console.error("Usage: ./update.js path/to/shatter-shell");
   process.exit(1);
 }
 
@@ -31,7 +31,7 @@ for (const info of Object.values(packageLock.packages)) {
   ++i;
 }
 
-let spec = fs.readFileSync("gnome-shell-extension-pop-shell.spec", "utf8");
+let spec = fs.readFileSync("gnome-shell-extension-shatter-shell.spec", "utf8");
 
 // Insert npm sources
 let start = spec.indexOf('# START NPM SOURCES');
@@ -46,4 +46,4 @@ spec = spec.slice(0, start) + npmSources + spec.slice(end);
 const commit = execSync(`git -C ${proj} rev-parse HEAD`, {encoding: "utf8"}).trim();
 spec = spec.replace(/%global commit +[0-9a-f]+/, `%global commit      ${commit}`);
 
-fs.writeFileSync("gnome-shell-extension-pop-shell.spec", spec, "utf8");
+fs.writeFileSync("gnome-shell-extension-shatter-shell.spec", spec, "utf8");
