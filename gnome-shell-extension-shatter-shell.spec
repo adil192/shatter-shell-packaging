@@ -9,7 +9,6 @@ License:        GPL-3.0-only
 URL:            https://github.com/adil192/shatter-shell
 BuildArch:      noarch
 
-%undefine       _disable_source_fetch
 Source0:        %{url}/archive/refs/tags/%{version}/%{extension}-%{version}.tar.gz
 
 Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
