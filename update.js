@@ -22,7 +22,7 @@ for (const info of Object.values(packageLock.packages)) {
   if (info.os && !info.os.includes("linux")) continue;
   if (!info.resolved) continue;
   npmSources += `Source${i}:      ${info.resolved}\n`;
-  npmCacheAdds += `npm cache add %{Source${i}}\n`;
+  npmCacheAdds += `npm cache add %{SOURCE${i}}\n`;
   if (info.integrity && info.integrity.startsWith("sha512-")) {
     let sha512sum = info.integrity.substring("sha512-".length);
     npmSources += `%define         SHA512SUM${i} ${sha512sum}\n`;
