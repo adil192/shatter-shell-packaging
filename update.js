@@ -14,6 +14,7 @@ if (!proj) {
 }
 
 let npmSources = "# START NPM SOURCES\n";
+let npmCacheAdds = "# START NPM CACHE ADD\n";
 
 const packageLock = require(`${proj}/package-lock.json`);
 let i = 100;
@@ -21,6 +22,7 @@ for (const info of Object.values(packageLock.packages)) {
   if (info.os && !info.os.includes("linux")) continue;
   if (!info.resolved) continue;
   npmSources += `Source${i}:      ${info.resolved}\n`;
+  npmCacheAdds += `npm cache add %{Source${i}}\n`;
   if (info.integrity && info.integrity.startsWith("sha512-")) {
     let sha512sum = info.integrity.substring("sha512-".length);
     npmSources += `%define         SHA512SUM${i} ${sha512sum}\n`;
@@ -31,16 +33,25 @@ for (const info of Object.values(packageLock.packages)) {
   ++i;
 }
 
-let spec = fs.readFileSync("gnome-shell-extension-shatter-shell.spec", "utf8");
-
-// Insert npm sources
-let start = spec.indexOf('# START NPM SOURCES');
-let end = spec.indexOf('# END NPM SOURCES');
-if (start === -1 || end === -1) {
-  console.error("Could not find sources placeholders");
-  process.exit(1);
+/**
+ * @param {string} spec
+ * @param {string} startString
+ * @param {string} endString
+ * @param {string} content
+ */
+function replaceSection(spec, startString, endString, content) {
+  const start = spec.indexOf(startString);
+  const end = spec.indexOf(endString);
+  if (start === -1 || end === -1) {
+    console.error("Could not find " + startString + " and/or " + endString);
+    process.exit(1);
+  }
+  return spec.slice(0, start) + content + spec.slice(end);
 }
-spec = spec.slice(0, start) + npmSources + spec.slice(end);
+
+let spec = fs.readFileSync("gnome-shell-extension-shatter-shell.spec", "utf8");
+spec = replaceSection(spec, '# START NPM SOURCES', '# END NPM SOURCES', npmSources)
+spec = replaceSection(spec, '# START NPM CACHE ADD', '# END NPM CACHE ADD', npmCacheAdds);
 
 // Update commit hash
 const commit = execSync(`git -C ${proj} rev-parse HEAD`, {encoding: "utf8"}).trim();
