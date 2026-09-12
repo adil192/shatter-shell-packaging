@@ -53,8 +53,8 @@ let spec = fs.readFileSync("gnome-shell-extension-shatter-shell.spec", "utf8");
 spec = replaceSection(spec, '# START NPM SOURCES', '# END NPM SOURCES', npmSources)
 spec = replaceSection(spec, '# START NPM CACHE ADD', '# END NPM CACHE ADD', npmCacheAdds);
 
-// Update commit hash
-const commit = execSync(`git -C ${proj} rev-parse HEAD`, {encoding: "utf8"}).trim();
-spec = spec.replace(/%global commit +[0-9a-f]+/, `%global commit      ${commit}`);
+// Update version
+const tag = execSync(`git -C ${proj} describe --tags --abbrev=0`, {encoding: "utf8"}).trim();
+spec = spec.replace(/Version: +[0-9.+]+/, `Version:        ${tag}`);
 
 fs.writeFileSync("gnome-shell-extension-shatter-shell.spec", spec, "utf8");

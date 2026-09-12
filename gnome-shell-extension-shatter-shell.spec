@@ -2,7 +2,7 @@
 %global uuid        %{extension}@adilhanney.com
 
 Name:           gnome-shell-extension-%{extension}
-Version:        2.0.1
+Version:        2.1.0
 Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
@@ -572,6 +572,23 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Sat Sep 12 2026 Adil Hanney <adilhanney@disroot.org> - 2.1.0-1
+- New:
+  - Added keyboard shortcuts for horizontal workspaces by @laikq in https://github.com/pop-os/shell/pull/1777.
+    (Pop!_OS previously only supported vertical workspaces.)
+  - Added smarter floating exceptions:
+    - Don't tile non-resizeable windows or non-moveable windows, e.g. Steam's sign-in dialog.
+    - Don't tile windows with the "skip-taskbar" flag, e.g. XWaylandVideoBridge's invisible window.
+    - This nets us wider compatibility and less reliance on an explicit floating exceptions list.
+  - Performance improvement in determining which windows to tile by caching compiled RegExp objects.
+- Fixed:
+  - Ignore no-op stack resize grabs by @philip-sterne in https://github.com/pop-os/shell/pull/1826.
+  - Fixed GNOME 48 crash if you click a tab's close button multiple times, based on @siddhpant's fix for https://github.com/pop-os/shell/issues/1794.
+  - Replaced pop orange with adwaita blue in another spot that I forgot last release.
+- Developer:
+  - Suppressed a warning in `make enable` when you don't have the original pop-shell installed.
+  - Minor cleanups: this release is 52 lines slimmer
+
 * Fri Sep 11 2026 Adil Hanney <adilhanney@disroot.org> - 2.0.1-1
 - New:
   - Improved the smoothness and symmetry of the fade transition between stacked windows.
