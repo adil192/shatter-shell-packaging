@@ -2,7 +2,7 @@
 %global uuid        %{extension}@adilhanney.com
 
 Name:           gnome-shell-extension-%{extension}
-Version:        2.2.0
+Version:        2.2.1
 Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
@@ -566,6 +566,24 @@ install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/gl
 
 
 %changelog
+* Tue Sep 15 2025 Adil Hanney <adilhanney@disroot.org> - 2.2.1-1
+- Fixes:
+  - Fixed a stacked window getting stuck as transparent in specific conditions.
+  - The Extension Manager app did not display the version of Shatter Shell.
+  - Restored stock GNOME's window attention handler. (I can't figure out why this was disabled in pop-shell 5 years ago, but I have no issues on GNOME 51.)
+- Smaller fixes:
+  - Fixed `entity_eq` not considering the generation of the entities.
+  - Fixed an incorrect range check which prevented inserting entities into a storage beyond the current store size.
+  - Fixed a bug preventing the 0th storage from being unregistered.
+  - Fixed a bug preventing the 0th slot being reused.
+- Performance:
+  - Only call `reset_visibility` after the new window has been activated (prevents starting an incorrect fade animation which gets immediately cancelled).
+- Developer:
+  - Replaced rustdoc syntax with jsdoc so that IDE features work.
+  - Improved readability by replacing numeric tags with readable strings or self-descriptive booleans.
+  - Merged duplicate implementations of Rust-style Result/Ok/Err types.
+  - Enabled type-checked eslints and stricter array indexing. This includes minor bug fixes and can prevent similar bugs (listed above) happening in the future.
+
 * Sun Sep 13 2026 Adil Hanney <adilhanney@disroot.org> - 2.2.0-1
 - New:
   - Ported the floating exceptions dialog and color chooser dialog to Adwaita/GTK4, and removed all imports of GTK3.
