@@ -3,7 +3,7 @@
 
 Name:           gnome-shell-extension-%{extension}
 Version:        2.3.0
-Release:        %autorelease
+Release:        3%{dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
 URL:            https://github.com/adil192/shatter-shell
