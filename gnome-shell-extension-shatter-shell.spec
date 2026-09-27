@@ -3,7 +3,7 @@
 
 Name:           gnome-shell-extension-%{extension}
 Version:        2.3.0
-Release:        3%{dist}
+Release:        4%{dist}
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
 URL:            https://github.com/adil192/shatter-shell
@@ -354,8 +354,8 @@ Source265:      https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz
 %define         SHA512SUM265 rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 # END NPM SOURCES
 
-BuildRequires:  nodejs-devel
-BuildRequires:  nodejs22-npm
+BuildRequires:  nodejs24-devel
+BuildRequires:  nodejs24-npm
 BuildRequires:  make
 
 Requires:       gnome-shell >= 48
