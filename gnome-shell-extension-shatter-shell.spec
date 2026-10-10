@@ -1,8 +1,9 @@
 %global extension   shatter-shell
 %global uuid        %{extension}@adilhanney.com
+%global appid       org.gnome.shell.extensions.%{extension}
 
 Name:           gnome-shell-extension-%{extension}
-Version:        2.3.1
+Version:        2.4.0
 Release:        %autorelease
 Summary:        GNOME Shell extension for advanced tiling window management
 License:        GPL-3.0-only
@@ -10,14 +11,6 @@ URL:            https://github.com/adil192/shatter-shell
 BuildArch:      noarch
 
 Source0:        %{url}/archive/refs/tags/%{version}/%{extension}-%{version}.tar.gz
-
-Source1:        50_org.gnome.desktop.wm.keybindings.%{extension}.gschema.override
-Source2:        50_org.gnome.mutter.%{extension}.gschema.override
-Source3:        50_org.gnome.mutter.wayland.%{extension}.gschema.override
-Source4:        50_org.gnome.settings-daemon.plugins.media-keys.%{extension}.gschema.override
-Source5:        50_org.gnome.shell.%{extension}.gschema.override
-# downstream-only
-Patch:          0001-Remove-schema-handling-from-transpile.sh.patch
 
 # START NPM SOURCES
 Source100:      https://registry.npmjs.org/@cacheable/memory/-/memory-2.2.0.tgz
@@ -162,28 +155,28 @@ Source169:      https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz
 %define         SHA512SUM169 GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==
 Source170:      https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz
 %define         SHA512SUM170 5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
-Source171:      https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.70.0.tgz
-%define         SHA512SUM171 /v8HZt6RlyIZxB3ntehELOcUcfxKPVGWXnQdJuHRmzrqgF8nQypcC/oxGW+Ot4VGKDq81XugPKxx0n5PBtf9PA==
-Source172:      https://registry.npmjs.org/ignore/-/ignore-7.0.9.tgz
-%define         SHA512SUM172 brTTsvFRt5C1gGHtPst/281UjPD5t9fBqbgoMPlVWy11ZLTPfu7HxK4ZYqO9H7o/yC9rSTCI85EaQ4OoY12qYw==
-Source173:      https://registry.npmjs.org/@typescript-eslint/parser/-/parser-8.70.0.tgz
-%define         SHA512SUM173 zYvrmj9Yxd63UGaXw+kdt6A0F0s0qveJyuatIM77bYC2DE4pgmg7a50u8LR7PRtXd0x+h+Tl3eXabGm06SWd3Q==
-Source174:      https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.70.0.tgz
-%define         SHA512SUM174 hFHbTNqhU9G+2eKFXCBVb1tjFT/LceiJ4+HfLO4pTpDI0KHi6iajpcFFkaSQ9gXmCh7n82A0PthaayEdN6mspQ==
-Source175:      https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.70.0.tgz
-%define         SHA512SUM175 8nP3Kwh5hlgZ4FicGvmznAmJe8UL4sdU8tLukrPaMuQmDuk4Y8xYfzu/aYZW4xT2JCgc7H/TpDI5cGlxcWJSqQ==
-Source176:      https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.70.0.tgz
-%define         SHA512SUM176 adnkeeNq9Sq1sUf4+FRVc0KdgYghzsgFpZSQVZVvY0LCuUuN0FnQgyGzCJeC4fW1cdXseBAjU2EOqUIjbNcZUw==
-Source177:      https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.70.0.tgz
-%define         SHA512SUM177 NUMKIhYVaVIVLnRL9CRt+VVcuLgSHUCpXn4/+K8wql+vdInUzvx8BjUO1oJ7cG9shjFJKtF8F8Hh2kCh3/KBVw==
-Source178:      https://registry.npmjs.org/@typescript-eslint/types/-/types-8.70.0.tgz
-%define         SHA512SUM178 asTOIYhDg4zdzOScCyaytrsV3cR6B4ecPQlXw/dJIm7J/MZTtCtfVII9JD8Geh4jTCrK/Xe6cg5UevoleMcoJQ==
-Source179:      https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.70.0.tgz
-%define         SHA512SUM179 d9NmHMPEKQ7QCLLm1jI3zmoQBwT5KwFYjXBJ9ymZfKCUU+5rmTRykKAFvH5Qn/ZCds3CEAFS9OC9M/jkl0X2bA==
-Source180:      https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.70.0.tgz
-%define         SHA512SUM180 oZmtKJz/4fufZ2p3+Cn3ijEojcdfR+1zYDH2xKYrEly0dR/Q/1xUPRCOlKGxod78nWlU2UnDe09GZ3TaknBFGA==
-Source181:      https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.70.0.tgz
-%define         SHA512SUM181 BoC8PiO4Hkdo0TVJh9Ntxr5MxPDI7/oFsrygN5ADelFSeXG/qgNuucIGA+L5Z6JpPTE/uRfcTWtscjbUaufepQ==
+Source171:      https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.71.1.tgz
+%define         SHA512SUM171 nNlBf6HuotqMgZvSkWD5hNdemiBIxQ2NmrlgfcUIeZRs+BbakjscCQRq/Hb74EFVnFiSWWdL12JruqwBy3ERDw==
+Source172:      https://registry.npmjs.org/ignore/-/ignore-7.0.12.tgz
+%define         SHA512SUM172 /8UvqAPU9DGTI9k4mxtf49U37Isfwr8Uts96+SBHIkFxPJnHS0Ew4f00sM4Scd8V8EjM0jUNtVDdv1kPdt35lg==
+Source173:      https://registry.npmjs.org/@typescript-eslint/parser/-/parser-8.71.1.tgz
+%define         SHA512SUM173 oM/5sAqz/l1v/zYK1qTOPrn2+JIrBGC1V6uNYucRO5gh6eT9vWJ/RhPbGE59byvZEUQ4VP6XkLBaS5Jti5jpvw==
+Source174:      https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.71.1.tgz
+%define         SHA512SUM174 Oijc9RUsohHjncg6iGi7gCtjnEjYt9FWv9u6ygK8uKcHK5eLjLAkqERQ9BaytbpceOFdk6kifPCS/zAZE+A99g==
+Source175:      https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.71.1.tgz
+%define         SHA512SUM175 1YUDZXdTnXLlob03SFHBipdyMBsDVm7zoSz0ytTJ39dk5J1TgsTK03VlR/dLXG/RLLUrPcYbD4rp23BmHxHP0w==
+Source176:      https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.71.1.tgz
+%define         SHA512SUM176 oTvkml5SxXhgg+WWKhod5qWQICDXtOB+/Hi9VdPKFAANJ2b7YOgMffgvzXuqog7R6A/JtrzRf128dsxummyWhg==
+Source177:      https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.71.1.tgz
+%define         SHA512SUM177 kH3t3jZCYv2PZSBEWPKTariLrCaoF1CLoPitYFBJOhAGEwWnSRAtGEifrfrpBa4K9JlwWNZotgA5w3/wLSk/FQ==
+Source178:      https://registry.npmjs.org/@typescript-eslint/types/-/types-8.71.1.tgz
+%define         SHA512SUM178 ybYnPTUwg3VQQOFEiBPLs8Jxl1ry2vXdn1kVKguomBbvxpetdu3MKTNDqFNUrlG8ylP9MpZosmXMFYlGQHk1oQ==
+Source179:      https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.71.1.tgz
+%define         SHA512SUM179 pSKSEK1JJpHs6KiKVtABCE4iJK5d7FLFzDXQNBQ2oRY7LEd3UwOt3TZemTgu9syTIf56dJWlTn/pdmrO9oKUXQ==
+Source180:      https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.71.1.tgz
+%define         SHA512SUM180 CBjT6gfAz3DW2j9Q4moFnqt208Aq+506sVGXfpRcyAeqn0EpayL0mjdWoCO2t3RC7GewNrFxdeehuEaPg6DMzQ==
+Source181:      https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.71.1.tgz
+%define         SHA512SUM181 0GxiUGqMU0qXJt58cBsiG3DP8lUmBaFo2vChtUX+CT7PnR3v/VGLLrzVP4K9r1lNiZXjHYefMBbPunplr09v6w==
 Source182:      https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-5.0.1.tgz
 %define         SHA512SUM182 tD40eHxA35h0PEIZNeIjkHoDR4YjjJp34biM0mDvplBe//mB+IHCqHDGV7pxF+7MklTvighcCPPZC7ynWyjdTA==
 Source183:      https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz
@@ -206,16 +199,16 @@ Source191:      https://registry.npmjs.org/@typescript/typescript-linux-s390x/-/
 %define         SHA512SUM191 IkwJc3L7yhytWd/ewjyxNDfOmswCm9GWMJT/ue/dU4aZNbwZeYAetq42VyLmsmSjvoX7z74X6ZaYCtzAr0EuGw==
 Source192:      https://registry.npmjs.org/@typescript/typescript-linux-x64/-/typescript-linux-x64-7.0.2.tgz
 %define         SHA512SUM192 EYdf2cNg7rgCWJnxCdJ+F3V39O8ihb37eHAu1LK8oAFizgTQbPOK7zHHXbPt8rX24COqODXeI3sIf0fCXG7H/A==
-Source193:      https://registry.npmjs.org/acorn/-/acorn-8.18.0.tgz
-%define         SHA512SUM193 lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==
+Source193:      https://registry.npmjs.org/acorn/-/acorn-8.19.0.tgz
+%define         SHA512SUM193 oJlA3XiRm7Cyk6qFD2Jn8ak9B7jSy0qy00ADO3+8dpT0LSjFihQYv4C02LFCSYJV3Q37xYwwRy5m+IpIiUzqWw==
 Source194:      https://registry.npmjs.org/acorn-jsx/-/acorn-jsx-5.3.2.tgz
 %define         SHA512SUM194 rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==
 Source195:      https://registry.npmjs.org/ajv/-/ajv-6.15.0.tgz
 %define         SHA512SUM195 fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==
 Source196:      https://registry.npmjs.org/balanced-match/-/balanced-match-4.0.4.tgz
 %define         SHA512SUM196 BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==
-Source197:      https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.9.tgz
-%define         SHA512SUM197 ScQ4IuvIEF1TMlP7Zt+vjJ//9zlPb2SDcxWxM3bk8s6t6GGdJ7KO1dCcTidOPJKePW30LE/2cT7wCyPho9/Wxg==
+Source197:      https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.12.tgz
+%define         SHA512SUM197 YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==
 Source198:      https://registry.npmjs.org/cacheable/-/cacheable-2.5.0.tgz
 %define         SHA512SUM198 60cyAOytib/OzBw1JNSoSV/boK1AtHryDIjvVBk7XbN4ugfkM3+Sry7fEjNgPMGgOjuaZPAp8ruZ0Cxafwyq9g==
 Source199:      https://registry.npmjs.org/chokidar/-/chokidar-5.0.0.tgz
@@ -230,8 +223,8 @@ Source203:      https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz
 %define         SHA512SUM203 Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==
 Source204:      https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz
 %define         SHA512SUM204 TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
-Source205:      https://registry.npmjs.org/eslint/-/eslint-10.10.0.tgz
-%define         SHA512SUM205 NPXn6r5zl4uET1DAVPaOwzX3rut4c0wcmw3dWJAfOsTM5+TogXo0DDjz8pwm/hL8cyVNpHqeK4JpN0NjnyFFNw==
+Source205:      https://registry.npmjs.org/eslint/-/eslint-10.12.0.tgz
+%define         SHA512SUM205 npHjrHb2o4ehH3mE+YuxABR+0gyb0aVWCIolgJDArwCiHEIsonBm3ZKjel5b0U5+a+MbEvIyRCGCzD3eKKK2NA==
 Source206:      https://registry.npmjs.org/eslint-scope/-/eslint-scope-9.1.2.tgz
 %define         SHA512SUM206 xS90H51cKw0jltxmvmHy2Iai1LIqrfbw57b79w/J7MfvDfkIkFZ+kj6zC3BjtUwh150HsSSdxXZcsuv72miDFQ==
 Source207:      https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz
@@ -324,16 +317,16 @@ Source250:      https://registry.npmjs.org/hookified/-/hookified-2.2.0.tgz
 %define         SHA512SUM250 p/LgFzRN5FeoD3DLS6bkUapeye6E4SI6yJs6KetENd18S+FBthqYq2amJUWpt5z0EQwwHemidjY5OqJGEKm5uA==
 Source251:      https://registry.npmjs.org/readdirp/-/readdirp-5.1.1.tgz
 %define         SHA512SUM251 Kko+Y5XQ6fM+Ce3dq3m9YGxnacYZYl9cA1wZjaF3Vbry2L3i1qVg8+CAgNPsXRArPMUMCaOR7oa9Nqntc43JKA==
-Source252:      https://registry.npmjs.org/sass/-/sass-1.104.0.tgz
-%define         SHA512SUM252 btHMApW2bgolvClhRW8AlQJzgI9lUB3pPSofBQQT+E46GWvf9o0TVQ13SYv5riWZVFyPN+JNz3TKW9XhBlc10w==
+Source252:      https://registry.npmjs.org/sass/-/sass-1.105.1.tgz
+%define         SHA512SUM252 1CnAWPyrrnVQzXGB/DUep1vYCKCm1CIBr+YxjjiW6wk9qtzemnGP4qicH56T2F9S4Hjtv/Ne3jDz8JqfdDU4oA==
 Source253:      https://registry.npmjs.org/semver/-/semver-7.8.5.tgz
 %define         SHA512SUM253 Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==
 Source254:      https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz
 %define         SHA512SUM254 kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==
 Source255:      https://registry.npmjs.org/shebang-regex/-/shebang-regex-3.0.0.tgz
 %define         SHA512SUM255 7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
-Source256:      https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.1.tgz
-%define         SHA512SUM256 UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
+Source256:      https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.2.tgz
+%define         SHA512SUM256 KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==
 Source257:      https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz
 %define         SHA512SUM257 wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==
 Source258:      https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.5.0.tgz
@@ -342,8 +335,8 @@ Source259:      https://registry.npmjs.org/type-check/-/type-check-0.4.0.tgz
 %define         SHA512SUM259 XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==
 Source260:      https://registry.npmjs.org/@typescript/typescript6/-/typescript6-6.0.2.tgz
 %define         SHA512SUM260 mbCddXd+jm7hfx7w2YU64/Av4/NqqeG3GoRZgxPcgoTxYjhrcfJRw9ULch71SS4G+Q3bOXFhRvPqjguN0Hyp5w==
-Source261:      https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.70.0.tgz
-%define         SHA512SUM261 P/W5cz70/cQAuKfY3xwQMWWTV7BvJ0mAQmi+9mBcsVPaBUpd6Ohpa+fECv9rBFrQcig86jAiNBFNWUqnTjr4pw==
+Source261:      https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.71.1.tgz
+%define         SHA512SUM261 oiNVPC3/NbV1FpaHU07l8O6ynqG9v4PAiW2WvTrAmZdR0f2HI/gE668ElMLCK7Xbsu5k2fK5C4fXNiq05j7/nQ==
 Source262:      https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz
 %define         SHA512SUM262 7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
 Source263:      https://registry.npmjs.org/which/-/which-2.0.2.tgz
@@ -559,7 +552,7 @@ npm cache add %{SOURCE265}
 
 
 %build
-%make_build compile
+%make_build COMPILE_SCHEMAS=false compile
 
 
 %install
@@ -567,17 +560,19 @@ npm cache add %{SOURCE265}
 %make_install
 
 # install the schema file
-install -D -p -m 0644 \
-    schemas/org.gnome.shell.extensions.%{extension}.gschema.xml \
-    %{buildroot}%{_datadir}/glib-2.0/schemas/org.gnome.shell.extensions.%{extension}.gschema.xml
+install -Dm644 \
+    schemas/%{appid}.gschema.xml \
+    -t %{buildroot}%{_datadir}/glib-2.0/schemas/
 
 # install the gnome-control-center keybindings
-install -d -m 0755 %{buildroot}%{_datadir}/gnome-control-center/keybindings
-install -p -m 0644 keybindings/*.xml %{buildroot}%{_datadir}/gnome-control-center/keybindings/
+install -Dm644 \
+    keybindings/*.xml \
+    -t %{buildroot}%{_datadir}/gnome-control-center/keybindings
 
 # install the schema override files
-install -d -m 0755 %{buildroot}%{_datadir}/glib-2.0/schemas
-install -p -m 0644 %{S:1} %{S:2} %{S:3} %{S:4} %{S:5} %{buildroot}%{_datadir}/glib-2.0/schemas/
+install -Dm644 \
+    keybinding-overrides/*.shatter-shell.gschema.override \
+    -t %{buildroot}%{_datadir}/glib-2.0/schemas/
 
 
 %files
